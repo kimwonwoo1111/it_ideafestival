@@ -4,6 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
+    base: "/it_ideafestival/",   // ✅ 요 줄 추가!!
+
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
