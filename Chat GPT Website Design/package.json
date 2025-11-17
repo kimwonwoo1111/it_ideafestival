@@ -1,6 +1,7 @@
 {
       "name": "Chat GPT Website Design",
       "version": "0.1.0",
+      "homepage": "https://kimwonwoo1111.github.io/it_ideafestival",
       "private": true,
       "dependencies": {
             "@radix-ui/react-accordion": "^1.2.3",
