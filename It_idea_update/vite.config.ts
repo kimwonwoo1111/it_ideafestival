@@ -4,7 +4,7 @@
   import path from 'path';
 
   export default defineConfig({
-    base: "/it_ideafestival/",   
+    base: "/it_ideafestival/",  
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

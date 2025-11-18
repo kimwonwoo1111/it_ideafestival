@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Upload } from "lucide-react";
+import { Upload, Search } from "lucide-react";
 import { Toaster } from "./components/ui/sonner";
 import { toast } from "sonner";
 import { FeedItem } from "./components/FeedItem";
@@ -7,6 +7,7 @@ import { FeedModal } from "./components/FeedModal";
 import { RankingList } from "./components/RankingList";
 import { ProfileMenu } from "./components/ProfileMenu";
 import { ContentSheet } from "./components/ContentSheet";
+import { SearchModal } from "./components/SearchModal";
 import { motion } from "motion/react";
 
 interface Evidence {
@@ -868,6 +869,7 @@ export default function App() {
   const [titleInput, setTitleInput] = useState("");
   const [showMyFacts, setShowMyFacts] = useState(false);
   const [showSaved, setShowSaved] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [posts, setPosts] = useState<Post[]>(mockPosts);
   const feedRef = useRef<HTMLDivElement>(null);
 
@@ -1021,6 +1023,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Toaster />
+      
+      {/* Search Button - Fixed Top Left */}
+      <div className="fixed top-6 left-6 z-50">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowSearch(true)}
+          className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200/50 group"
+        >
+          <Search className="w-5 h-5 text-gray-700 group-hover:text-purple-600 transition-colors" />
+        </motion.button>
+      </div>
+
       {/* Profile Menu - Fixed Top Right */}
       <div className="fixed top-6 right-6 z-50">
         <ProfileMenu
@@ -1206,6 +1221,17 @@ export default function App() {
         title="저장된 컨텐츠"
         items={savedPosts}
         onItemClick={(id) => {
+          const post = posts.find((p) => p.id === id);
+          if (post) setSelectedPost(post);
+        }}
+      />
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={showSearch}
+        onClose={() => setShowSearch(false)}
+        posts={posts}
+        onPostClick={(id) => {
           const post = posts.find((p) => p.id === id);
           if (post) setSelectedPost(post);
         }}
